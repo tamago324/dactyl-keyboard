@@ -1,3 +1,18 @@
+# Dactyl-ManuForm
+
+https://github.com/joshreve/dactyl-keyboard edited to look like tamago324.
+
+## 実行方法
+
+* 設定ファイル (`generate_configuration.py`) を編集する
+* 設定ファイルを反映し、OpenSCAD のファイルを生成する
+
+```
+make build
+```
+
+
+
 # The Dactyl-ManuForm Keyboard - Python 3 - Cadquery
 This is a fork of [Dactyl-Manuform](https://github.com/tshort/dactyl-keyboard) by Tom Short, which itself is a fork of [Dactyl](https://github.com/adereth/dactyl-keyboard) by Matthew Adereth, a parameterized, split-hand, concave, columnar, ergonomic keyboard.
 
