@@ -21,11 +21,13 @@ shape_config = {
     'save_dir': '.',
     'config_name':  "DM",
 
-    'show_caps': 'MX',
+    'show_caps': False,
     'show_pcbs': False, #only runs if caps are shown, easist place to initially inject geometry
 
-    'nrows':  5, #5,  # key rows
-    'ncols':  6, #6,  # key columns
+    # 'nrows':  5, #5,  # key rows
+    # 'ncols':  6, #6,  # key columns
+    'nrows':  3, #5,  # key rows
+    'ncols':  5, #6,  # key columns
 
     'alpha':  pi / 12.0,  # curvature of the columns
     'beta':  pi / 36.0,  # curvature of the rows
@@ -38,7 +40,8 @@ shape_config = {
 
     'column_style_gt5':  "orthographic",
     'column_style':  "standard",  # options include :standard, :orthographic, and :fixed
-    'reduced_inner_cols': 2,  #currently supports 0 or 2 due to thumb cluster attachment
+    # 'reduced_inner_cols': 2,  #currently supports 0 or 2 due to thumb cluster attachment
+    'reduced_inner_cols': 0,  # 内側のカラムは不要なため、削除する
     'reduced_outer_cols': 0,
 
 
@@ -46,7 +49,6 @@ shape_config = {
     'keyboard_z_offset':  (
         11  # controls overall height# original=9 with centercol=3# use 16 for centercol=2
     ),
-
 
     'extra_width': 2.5,  # extra space between the base of keys# original= 2
     'extra_height': 1.0,  # original= 0.5
@@ -62,14 +64,17 @@ shape_config = {
     ##############################
 
     # 'DEFAULT' 6-key, 'MINI' 5-key, 'CARBONFET' 6-key, 'MINIDOX' 3-key, 'TRACKBALL_ORBYL', 'TRACKBALL_CJ'
-    'thumb_style': 'DEFAULT',
+    # 'thumb_style': 'DEFAULT',
+    'thumb_style': 'MINIDOX',
     'default_1U_cluster': True, # only used with default, makes top right thumb cluster key 1U
     # Thumb key size.  May need slight oversizing, check w/ caps.  Additional spacing will be automatically added for larger keys.
-    'minidox_Usize': 1.6,
+    # 'minidox_Usize': 1.6,
+    'minidox_Usize': 1,
     # Thumb plate rotations, anything other than 90 degree increments WILL NOT WORK.
 
     'mini_index_key': True,
 
+    # ネジの位置
     # Screw locations and extra screw locations for separable thumb, all from thumb origin
     # Pulled out of hardcoding as drastic changes to the geometry may require fixes to the screw mounts.
     # First screw in separable should be similar to the standard location as it will receive the same modifiers.
@@ -77,8 +82,11 @@ shape_config = {
     'default_separable_thumb_screw_xy_locations': [[-21, -58]],
     'mini_thumb_screw_xy_locations': [[-29, -52]],
     'mini_separable_thumb_screw_xy_locations': [[-29, -52], [-62, 10], [12, -25]],
-    'minidox_thumb_screw_xy_locations': [[-37, -34]],
+    # ====================
+    # MINIDOX だとここが重要なのかな？
+    'minidox_thumb_screw_xy_locations': [[-41, -34]],
     'minidox_separable_thumb_screw_xy_locations': [[-37, -34], [-62, 12], [10, -25]],
+    # ====================
     'carbonfet_thumb_screw_xy_locations': [[-48, -37]],
     'carbonfet_separable_thumb_screw_xy_locations': [[-48, -37], [-52, 10], [12, -35]],
     'orbyl_thumb_screw_xy_locations': [[-53, -68]],
@@ -86,17 +94,20 @@ shape_config = {
     'tbcj_thumb_screw_xy_locations': [[-40, -75]],
     'tbcj_separable_thumb_screw_xy_locations': [[-40, -75], [-63, 10], [15, -40]],
 
-    'thumb_plate_tr_rotation': 0.0,  # Top right plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
-    'thumb_plate_tl_rotation': 0.0,  # Top left plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
+    # minidox は tr, tl, ml が使われ、ホットスワップのため、90度回転する
+    'thumb_plate_tr_rotation': 90.0,  # Top right plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
+    'thumb_plate_tl_rotation': 90.0,  # Top left plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
     'thumb_plate_mr_rotation': 0.0,  # Mid right plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
-    'thumb_plate_ml_rotation': 0.0,  # Mid left plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
+    'thumb_plate_ml_rotation': 90.0,  # Mid left plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
     'thumb_plate_br_rotation': 0.0,  # Bottom right plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
-    'thumb_plate_bl_rotation': 0.0,  # Bottom right plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
+    'thumb_plate_bl_rotation': 0.0,  # Bottom left plate rotation tweaks as thumb cluster is crowded for hot swap, etc.
     ##############################
     # EXPERIMENTAL
     'separable_thumb': False,  #creates a separable thumb section with additional screws to hold it down.  Only attached at base.
     ##############################
 
+    # ==============
+    # トラックボール
     ###################################
     ## Trackball in Wall             ##
     ###################################
@@ -185,6 +196,9 @@ shape_config = {
     'tb_sensor_translation_offset': (0, 0, 0),  #deviation from socket offsets, for fixing generated geometry issues
     'tb_sensor_rotation_offset':    (0, 0, 0),  #deviation from socket offsets, for changing the sensor roll orientation
 
+    # ==============
+
+
     ##############################
     # EXPERIMENTAL PARAMETERS
     ##############################
@@ -236,13 +250,13 @@ shape_config = {
     # 'HS_UNDERCUT' = hot swap underside with undercut. Does not generate properly.  Hot swap step needs to be modified.
     # 'HS_NOTCH' = hot swap underside with notch.  Does not generate properly.  Hot swap step needs to be modified.
     # 'plate_style':  'NUB',
-    'plate_style': 'NOTCH',
+    'plate_style': 'HS_NOTCH',
 
     'hole_keyswitch_height':  14.0,
     'hole_keyswitch_width':  14.0,
 
-    'nub_keyswitch_height':  14.4,
-    'nub_keyswitch_width':  14.4,
+    'nub_keyswitch_height':  14,
+    'nub_keyswitch_width':  14,
 
     'undercut_keyswitch_height':  14.0,
     'undercut_keyswitch_width':  14.0,
@@ -273,7 +287,9 @@ shape_config = {
     # 'SLIDING' = Features to slide the OLED in place and use a pin or block to secure from underneath.
     # 'CLIP' = Features to set the OLED in a frame a snap a bezel down to hold it in place.
 
-    'oled_mount_type':  'CLIP',
+    # 'oled_mount_type':  'CLIP',
+    # OLED は不要
+    'oled_mount_type':  'NONE',
     'oled_center_row': 1.25, # if not None, this will override the oled_mount_location_xyz and oled_mount_rotation_xyz settings
     'oled_translation_offset': (0, 0, 4), # Z offset tweaks are expected depending on curvature and OLED mount choice.
     'oled_rotation_offset': (0, 0, 0),
@@ -429,7 +445,9 @@ shape_config = {
     ###################################
     ## HOLES ON PLATE FOR PCB MOUNT
     ###################################
-    'plate_holes':  True,
+    # PCB を止めるための穴は不要
+    # 'plate_holes':  True,
+    'plate_holes':  False,
     'plate_holes_xy_offset': (0.0, 0.0),
     'plate_holes_width': 14.3,
     'plate_holes_height': 14.3,
