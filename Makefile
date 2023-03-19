@@ -44,14 +44,14 @@ build-models: check-requirements ## Build models.
 	cd ${current_dir} && \
 	${DOCKER_CMD} run --rm --name DM-run -v ${source_dir}:/app/src -v ${artifact_dir}:/app/things -v ${config_dir}:/app/configs dactyl-keyboard python3 -i dactyl_manuform.py && \
 	echo "Done"
-.PHONY: config
+.PHONY: build-models
 
-build-models: check-requirements ## Build models.
+build-models-release: check-requirements ## Build models.
 	@echo "\nGenerate release models..\n" && \
 	cd ${current_dir} && \
 	${DOCKER_CMD} run --rm --name DM-release-build -v ${source_dir}:/app/src -v ${artifact_dir}:/app/things -v ${config_dir}:/app/configs dactyl-keyboard python3 -i model_builder.py && \
 	echo "Done"
-.PHONY: config
+.PHONY: build-models-release
 
 
 shell: check-requirements ## Open an interactive shell inside a container.
